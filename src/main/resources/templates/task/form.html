@@ -12,27 +12,30 @@
 </head>
 <body>
     <h1>Epic Task</h1>
-    <h2>Cadastrar tarefa</h2>
+    <h2 th:text="#{task.create}">Cadastrar tarefa</h2>
 
-    <form action="/tasks" class="container" method="POST">
+    <form action="/tasks" class="container" method="POST" th:object="${task}">
         <div class="nes-field">
-            <label for="title">Título</label>
-            <input name="title" type="text" id="title" class="nes-input">
+            <label for="title" th:text="#{task.title}"></label>
+            <input th:field="*{title}" class="nes-input" th:classappend="${#fields.hasErrors('title')} ? is-error">
+            <span  class="nes-text is-error" th:errors="*{title}"></span>
         </div>
 
         <div>
-            <label for="description">Descrição</label>
-            <textarea name="description" id="description" class="nes-textarea"></textarea>
+            <label for="description" th:text="#{task.description}"></label>
+            <textarea th:field="*{description}" class="nes-textarea" th:classappend="${#fields.hasErrors('description')} ? is-error"></textarea>
+            <span  class="nes-text is-error" th:errors="*{description}"></span>
         </div>
         
         <div class="nes-field">
-            <label for="score">Pontos</label>
-            <input name="score" type="number" id="score" class="nes-input">
+            <label for="score" th:text="#{task.score}"></label>
+            <input th:field="*{score}" type="number" class="nes-input" th:classappend="${#fields.hasErrors('score')} ? is-error">
+            <span  class="nes-text is-error" th:errors="*{score}" ></span>
         </div>
 
-        <a class="nes-btn" href="/tasks">cancelar</a>
+        <a class="nes-btn" href="/tasks" th:text="#{cancel}"></a>
 
-        <input type="submit" class="nes-btn is-primary" value="cadastrar"/>
+        <input type="submit" class="nes-btn is-primary" th:value="#{create}"/>
     </form>
     
 

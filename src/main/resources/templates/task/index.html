@@ -12,9 +12,9 @@
 </head>
 <body>
     <h1>Epic Task</h1>
-    <h2>Tarefas Pendentes</h2>
+    <h2 th:text="#{task.todo}"></h2>
 
-    <a href="tasks/new" class="nes-btn is-primary">nova tarefa</a>
+    <a href="tasks/new" class="nes-btn is-primary" th:text="#{task.create}"></a>
 
     <div class="nes-container is-rounded is-dark" th:if="${message != null}">
         <p th:text="${message}"></p>
@@ -31,10 +31,14 @@
             <progress class="nes-progress is-success" th:value="${task.status}" max="100"></progress>
 
             <details>
-                <summary>ações</summary>
-                <button type="button" class="nes-btn is-primary">pegar</button>
-                <button type="button" class="nes-btn is-warning">editar</button>
-                <a th:href="${'tasks/delete/' + task.id}" class="nes-btn is-error">apagar</a>
+                <summary th:text="#{actions}"></summary>
+                <button type="button" class="nes-btn is-primary" th:text="#{take}"></button>
+                <button type="button" class="nes-btn is-warning" th:text="#{edit}"></button>
+                <form th:action="${'/tasks/' + task.id}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="nes-btn is-error" th:text="#{delete}"></button>
+
+                </form>
 
             </details>
 
